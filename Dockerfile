@@ -1,10 +1,10 @@
 # syntax=docker/dockerfile:1
 FROM ubuntu:20.04
-ENV TZ="America/Los Angeles"
+ENV TZ="Asia/Jakarta"
 
 
 RUN apt-get update
-RUN DEBIAN_FRONTEND="noninteractive" apt-get install --yes dbus-x11 python3 wget g++ make build-essential git libx11-dev python3-dbus  libopencv-dev cmake libtclap-dev libmagic-dev libfreetype6-dev libxrandr-dev libxinerama-dev libxcursor-dev xpra
+RUN DEBIAN_FRONTEND="noninteractive" apt-get install --yes dbus-x11 python3 wget g++ make build-essential git libx11-dev python3-dbus  libopencv-dev cmake libtclap-dev libmagic-dev libpoppler-cpp-dev libfreetype6-dev libxrandr-dev libxinerama-dev libxcursor-dev xpra
 RUN wget -q https://xpra.org/gpg.asc -O- | apt-key add -
 
 
