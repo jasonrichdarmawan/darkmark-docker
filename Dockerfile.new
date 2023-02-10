@@ -1,0 +1,41 @@
+# syntax=docker/dockerfile:1
+FROM ubuntu:20.04
+
+# Install Darknet
+ENV TZ="Asia/Jakarta"
+RUN apt-get update
+RUN DEBIAN_FRONTEND=noninteractive apt-get install --yes build-essential git libopencv-dev
+RUN git clone https://github.com/AlexeyAB/darknet.git
+WORKDIR /src/darknet
+RUN sed -i 's/LIBSO=0/LIBSO=1/g' Makefile && \
+    make && \
+    cp libdarknet.so /usr/local/lib/ && \
+    cp include/darknet.h /usr/local/include/ && \
+    ldconfig
+
+# Install DarkHelp
+RUN apt-get install --yes cmake build-essential libtclap-dev libmagic-dev libopencv-dev
+WORKDIR /src
+RUN git clone https://github.com/stephanecharette/DarkHelp.git
+WORKDIR /src/DarkHelp/build
+RUN cmake -DCMAKE_BUILD_TYPe=Release .. && \
+    make && \
+    make package && \
+    dpkg -i darkhelp*.deb
+
+# Install DarkMask
+RUN apt-get install --yes build-essential cmake libopencv-dev libx11-dev libfreetype6-dev libxrandr-dev libxinerama-dev libxcursor-dev libmagic-dev libpoppler-cpp-dev fonts-liberation
+WORKDIR /src
+RUN git clone https://github.com/stephanecharette/DarkMark.git
+WORKDIR /src/DarkMark/build
+RUN cmake -DCMAKE_BUILD_TYPE=Release .. && \
+    make && \
+    make package && \
+    dpkg -i darkmark*.deb
+# Change the darknet_dir value to /src/darknet
+RUN sed -i 's/<VALUE name="darknet_dir" val="\/root\/darknet"\/>/<VALUE name="darknet_dir" val="\/root\/darknet"\/>/g' /root/.DarkMark/DarkMark.cfg
+
+# To connect to the X11 Server (on the host machine).
+ENV DISPLAY=host.docker.internal:0.0
+
+CMD ["DarkMark"]
