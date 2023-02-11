@@ -37,6 +37,7 @@ RUN cmake -DCMAKE_BUILD_TYPE=Release .. && \
 # Create non-root user
 RUN useradd nonroot
 USER nonroot
+WORKDIR /home/nonroot
 
 # To connect to the X11 Server (on the host machine).
 ENV DISPLAY=host.docker.internal:0.0
