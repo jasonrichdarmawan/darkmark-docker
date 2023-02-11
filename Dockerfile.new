@@ -5,9 +5,9 @@ FROM ubuntu:20.04
 ENV TZ="Asia/Jakarta"
 RUN apt-get update
 RUN DEBIAN_FRONTEND=noninteractive apt-get install --yes build-essential git libopencv-dev
-WORKDIR /src
+WORKDIR /home/nonroot
 RUN git clone https://github.com/AlexeyAB/darknet.git
-WORKDIR /src/darknet
+WORKDIR /home/nonroot/darknet
 RUN sed -i 's/LIBSO=0/LIBSO=1/g' Makefile && \
     make && \
     cp libdarknet.so /usr/local/lib/ && \
@@ -16,9 +16,9 @@ RUN sed -i 's/LIBSO=0/LIBSO=1/g' Makefile && \
 
 # Install DarkHelp
 RUN apt-get install --yes cmake build-essential libtclap-dev libmagic-dev libopencv-dev
-WORKDIR /src
+WORKDIR /home/nonroot
 RUN git clone https://github.com/stephanecharette/DarkHelp.git
-WORKDIR /src/DarkHelp/build
+WORKDIR /home/nonroot/DarkHelp/build
 RUN cmake -DCMAKE_BUILD_TYPe=Release .. && \
     make && \
     make package && \
@@ -26,17 +26,19 @@ RUN cmake -DCMAKE_BUILD_TYPe=Release .. && \
 
 # Install DarkMask
 RUN apt-get install --yes build-essential cmake libopencv-dev libx11-dev libfreetype6-dev libxrandr-dev libxinerama-dev libxcursor-dev libmagic-dev libpoppler-cpp-dev fonts-liberation
-WORKDIR /src
+WORKDIR /home/nonroot
 RUN git clone https://github.com/stephanecharette/DarkMark.git
-WORKDIR /src/DarkMark/build
+WORKDIR /home/nonroot/DarkMark/build
 RUN cmake -DCMAKE_BUILD_TYPE=Release .. && \
     make && \
     make package && \
     dpkg -i darkmark*.deb
-# Change the darknet_dir value to /src/darknet
-RUN sed -i 's/<VALUE name="darknet_dir" val="\/root\/darknet"\/>/<VALUE name="darknet_dir" val="\/root\/darknet"\/>/g' /root/.DarkMark/DarkMark.cfg
+
+# Create non-root user
+RUN useradd nonroot
+USER nonroot
 
 # To connect to the X11 Server (on the host machine).
 ENV DISPLAY=host.docker.internal:0.0
 
-CMD ["DarkMark"]
+CMD ["/bin/bash"]
