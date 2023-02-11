@@ -8,7 +8,7 @@ Go to the [DarkMark official repository](https://github.com/stephanecharette/Dar
 
 ## Test using xeyes.
 
-xeyes is a simple X11 app to check if the Docker container can forward the GUI to the host machine.
+xeyes is a simple X11 application to test if a Docker container can forward GUI to the host machine.
 
 1. Install X11 Server i.e. for macOS, install XQuartz. Start the X11 Server.
 2. Allow host names from which X11 server accepts connections `$ xhost +127.0.0.1`
