@@ -26,8 +26,12 @@ $ docker run --rm xeyes
 3. Try to open DarkMark.
 
 ```
+# Build the Docker image
 $ docker build -t darkmark -f Dockerfile.new .
-$ docker run --name darkmark darkmark
+$ docker run -it --name darkmark darkmark
+
+# Open the DarkMark
+(nonroot) $ DarkMark
 ```
 
 # Tested Environment
