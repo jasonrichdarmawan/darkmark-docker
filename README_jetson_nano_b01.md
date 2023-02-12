@@ -88,5 +88,8 @@ find: ‘/home/nonroot/shared/stop_sign’: No such file or directory
 The solution is to change the `/home/nonroot` to the NVIDIA Jetson Nano B01 current user `~` by running this command in the terminal.
 
 ```
-$ sed -i 's/\/home\/nonroot/\/home\/~/g' stop_sign_train.sh
+$ sed -i 's/\/home\/nonroot/\/home\/tempatkerja-01/g' stop_sign_train.sh
+$ sed -i 's/\/home\/nonroot/\/home\/tempatkerja-01/g' stop_sign.data
+$ sed -i 's/\/home\/nonroot/\/home\/tempatkerja-01/g' stop_sign_train.txt
+$ sed -i 's/\/home\/nonroot/\/home\/tempatkerja-01/g' stop_sign_valid.txt
 ```
