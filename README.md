@@ -11,8 +11,8 @@ Go to the [DarkMark official repository](https://github.com/stephanecharette/Dar
 xeyes is a simple X11 application to test if a Docker container can forward GUI to the host machine.
 
 1. Install X11 Server i.e. for macOS, install XQuartz. Start the X11 Server.
-2. Allow host names from which X11 server accepts connections. For macOS, run the command below in the terminal `$ xhost +127.0.0.1`
-3. Try to open xeyes by running the command below in the terminal:
+2. Allow host names from which X11 server accepts connections. For macOS, run the command below in the host machine terminal `$ xhost +127.0.0.1`
+3. Try to open xeyes by running the command below in the host machine terminal:
 
 ```
 $ docker build -t xeyes -f Dockerfile.xeyes .
@@ -62,7 +62,7 @@ If you have never use DarkMark before, watch these tutorial:
 Authorization required, but no authorization protocol specified
 ```
 
-The solution is to make the xhost list persistent, by running the command below in the terminal.
+The solution is to make the xhost list persistent, by running the command below in the host machine terminal.
 ```
 $ sudo bash -c 'echo 127.0.0.1 >> /etc/X0.hosts'
 ```
