@@ -8,15 +8,12 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install --yes build-essential git lib
 WORKDIR /home/nonroot
 RUN git clone https://github.com/AlexeyAB/darknet.git
 WORKDIR /home/nonroot/darknet
+# Makefile configuration
 # for more information 
 # see https://www.ccoderun.ca/programming/darknet_faq/#how_to_build_on_linux
 RUN sed -i '0,/OPENCV=0/s//OPENCV=1/; 0,/OPENMP=0/s//OPENMP=1/; 0,/LIBSO=0/s//LIBSO=1/' Makefile && \
     # uncomment if run in Intel CPU
     # sed -i '0,/AVX=0/s//AVX=1/' Makefile && \
-    # uncomment if run with GPU
-    # sed -i '0,/GPU=0/s//GPU=1/; 0,/CUDNN=0/s//CUDNN=1/' Makefile && \
-    # uncomment if run with Jetson Xavier
-    # sed -i '0,/CUDNN_HALF=0/s//CUDNN_HALF=1/' Makefile && \
     make && \
     cp libdarknet.so /usr/local/lib/ && \
     cp include/darknet.h /usr/local/include/ && \
