@@ -46,7 +46,9 @@ $ docker run -it --rm -v $PWD/shared:/home/nonroot/shared --name darkmark darkma
 (nonroot) $ DarkMark
 ```
 
-If you have never use DarkMark before, watch [the tutorial](https://www.youtube.com/watch?v=RcLL8Lea6Ec&t=1s)
+If you have never use DarkMark before, watch these tutorial:
+1. [install darknet, DarkHelp, DarkMark and train](https://www.youtube.com/watch?v=RcLL8Lea6Ec)
+2. [create darknet files](https://www.youtube.com/watch?v=8Ms9T9Ue2g8)
 
 # Tested Environment
 
@@ -72,3 +74,10 @@ minimized window
 ![minimized window](./readme_images/minimized_window.png)
 
 The solution is to drag the 3 line strip to the right.
+
+# Notable References
+
+1. [How to increase FPS](https://www.ccoderun.ca/programming/darknet_faq/#fps)
+2. [YOLOv3 FPS results with Jetson devices](https://www.ccoderun.ca/programming/2021-10-16_darknet_fps/#resize)
+3. [YOLO to detect small object](https://www.youtube.com/watch?v=861LvUXvJmA)
+4. [YOLOv4 and YOLOv4-tiny comparison](https://www.youtube.com/watch?v=gPP6fh8IIAo&t=184s)
