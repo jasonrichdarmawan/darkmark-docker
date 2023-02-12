@@ -61,3 +61,5 @@ minimized window
 ![minimized window](./readme_images/minimized_window.png)
 
 The solution is to drag the 3 line strip to the right.
+
+3. You can't train YOLOv4-tiny with this Docker image. Use [Vertex AI](https://cloud.google.com/vertex-ai/pricing#the-americas) or [Vast.ai](https://console.vast.ai/create/).
