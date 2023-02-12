@@ -24,7 +24,18 @@ $ docker run --rm xeyes
 1. Start the X11 Server.
 2. `$ xhost +127.0.0.1`
 3. Create a folder named `shared` in this repository. Use this folder for storing the neural network file, dataset, weights that will be used by DarkMark.
-4. Try to open DarkMark.
+4. Edit the `Dockerfile.new`, i.e. set to `AVX=1` in Makefile if you run the Docker image with Intel CPU.
+
+`darknet/Makefile`
+```
+# set GPU=1 and CUDNN=1 to speedup on GPU
+# set CUDNN_HALF=1 to further speedup 3 x times (Mixed-precision on Tensor Cores) GPU: Volta, Xavier, Turing and higher
+# set AVX=1 and OPENMP=1 to speedup on CPU (if error occurs then set AVX=0)
+# set ZED_CAMERA=1 to enable ZED SDK 3.0 and above
+# set ZED_CAMERA_v2_8=1 to enable ZED SDK 2.X
+```
+
+5. Try to open DarkMark.
 
 ```
 # Build the Docker image
@@ -61,5 +72,3 @@ minimized window
 ![minimized window](./readme_images/minimized_window.png)
 
 The solution is to drag the 3 line strip to the right.
-
-3. You can't train YOLOv4-tiny with this Docker image. Use [Vertex AI](https://cloud.google.com/vertex-ai/pricing#the-americas) or [Vast.ai](https://console.vast.ai/create/).
