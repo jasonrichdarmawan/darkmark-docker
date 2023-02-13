@@ -36,6 +36,9 @@ RUN cmake -DCMAKE_BUILD_TYPe=Release .. && \
 RUN apt-get install --yes build-essential cmake libopencv-dev libx11-dev libfreetype6-dev libxrandr-dev libxinerama-dev libxcursor-dev libmagic-dev libpoppler-cpp-dev fonts-liberation
 WORKDIR /home/nonroot
 RUN git clone https://github.com/stephanecharette/DarkMark.git
+WORKDIR /home/nonroot/DarkMark/src-darkmark
+# fix: keyboard without numeric keypad combine '+' and '=' into 1 key. the drawback is that keyboard can't input '+' without the 'SHIFT' key 
+RUN sed -i "0,/keychar == '+'/s//keychar == '+' || keychar == '='/" DMContent.cpp
 WORKDIR /home/nonroot/DarkMark/build
 RUN cmake -DCMAKE_BUILD_TYPE=Release .. && \
     make && \
