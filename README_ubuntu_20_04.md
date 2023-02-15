@@ -22,6 +22,7 @@ sudo apt-get -y install cuda
 export PATH=/usr/local/cuda-12.0/bin$PATH
 export LD_LIBRARY_PATH=/usr/local/cuda-12.0/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 echo -e "export PATH=/usr/local/cuda-12.0/bin:$PATH\nexport LD_LIBRARY_PATH=/usr/local/cuda-12.0/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}" >> ~/.bashrc
+source ~/.bashrc
 
 sudo systemctl enable nvidia-persistenced
 sudo cp /lib/udev/rules.d/40-vm-hotadd.rules /etc/udev/rules.d
