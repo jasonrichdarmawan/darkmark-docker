@@ -15,18 +15,19 @@ xeyes is a simple X11 application to test if a Docker container can forward GUI 
 3. Try to open xeyes by running the command below in the host machine terminal:
 
 ```
-$ docker build -t xeyes -f Dockerfile.xeyes .
-$ docker run --rm xeyes
+docker build -t xeyes -f Dockerfile.xeyes .
+docker run --rm xeyes
 ```
 
 ## Test using DarkMark
 
 1. Start the X11 Server.
-2. `$ xhost +127.0.0.1`
+2. `$ xhost +127.0.0.1` in the host machine terminal.
 3. Create a folder named `shared` in this repository. Use this folder for storing the neural network file, dataset, weights that will be used by DarkMark.
 4. Edit the `Dockerfile.new`, i.e. set to `AVX=1` in Makefile if you run the Docker image with Intel CPU.
 
-`darknet/Makefile`
+Reference:
+1. from the `darknet/Makefile` file
 ```
 # set GPU=1 and CUDNN=1 to speedup on GPU
 # set CUDNN_HALF=1 to further speedup 3 x times (Mixed-precision on Tensor Cores) GPU: Volta, Xavier, Turing and higher
@@ -37,12 +38,14 @@ $ docker run --rm xeyes
 
 5. Try to open DarkMark.
 
+Build the Docker image
 ```
-# Build the Docker image
-$ docker build -t darkmark -f Dockerfile.new .
-$ docker run -it --rm -v $PWD/shared:/home/nonroot/shared --name darkmark darkmark
+docker build -t darkmark -f Dockerfile.new .
+docker run -it --rm -v $PWD/shared:/home/nonroot/shared --name darkmark darkmark
+```
 
-# Open the DarkMark
+Open the DarkMark, run this command in the docker container.
+```
 (nonroot) $ DarkMark
 ```
 

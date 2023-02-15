@@ -2,8 +2,11 @@ This README is not related to darkmark-docker repository.
 
 # Installation
 
+1. Install darknet
+
+Reference:
+1. https://www.ccoderun.ca/programming/darknet_faq/#how_to_build_on_linux
 ```
-# Install darknet
 sudo apt-get update
 sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes build-essential git libopencv-dev
 git clone https://github.com/AlexeyAB/darknet.git
@@ -17,11 +20,15 @@ make
 sudo cp libdarknet.so /usr/local/lib/
 sudo cp include/darknet.h /usr/local/include/
 sudo ldconfig
+```
 
-# Install time
+2. Install time
+```
 sudo apt-get --yes install time
+```
 
-# Install DarkHelp
+3. Install DarkHelp
+```
 sudo apt-get install --yes cmake build-essential libtclap-dev libmagic-dev libopencv-dev
 cd ~
 git clone https://github.com/stephanecharette/DarkHelp.git
@@ -32,8 +39,10 @@ cmake -DCMAKE_BUILD_TYPe=Release ..
 make
 make package
 sudo dpkg -i darkhelp*.deb
+```
 
-# Insstall DarkMark
+4. Install DarkMark
+```
 sudo apt-get install --yes build-essential cmake libopencv-dev libx11-dev libfreetype6-dev libxrandr-dev libxinerama-dev libxcursor-dev libmagic-dev libpoppler-cpp-dev fonts-liberation
 cd ~
 git clone https://github.com/stephanecharette/DarkMark.git
@@ -58,13 +67,13 @@ make: *** [obj/convolutional_kernels.o] Error 127
 
 The solution is to run this command in the NVIDIA Jetson Nano B01 terminal
 ```
-$ export PATH=/usr/local/cuda/bin:$PATH
-$ export LD_LIBRARY_PATH=/usr/local/cuda/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+export PATH=/usr/local/cuda/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 ```
 
 Then, set the `ARCH` variable in the `~/darknet/Makefile` by running this command in the terminal
 ```
-$ echo "ARCH= -gencode arch=compute_53,code=[sm_53,compute_53]" >> ~/darknet/Makefile
+echo "ARCH= -gencode arch=compute_53,code=[sm_53,compute_53]" >> ~/darknet/Makefile
 ```
 
 2. If you train in NVIDIA Jetson Nano B01, you will get this error message.
@@ -88,8 +97,8 @@ find: ‘/home/nonroot/shared/stop_sign’: No such file or directory
 The solution is to change the `/home/nonroot` to the NVIDIA Jetson Nano B01 current user home directory i.e. `/home/tempatkerja-01` by running this command in the terminal.
 
 ```
-$ sed -i "s|/home/nonroot|$HOME|g" stop_sign_train.sh
-$ sed -i "s|/home/nonroot|$HOME|g" stop_sign.data
-$ sed -i "s|/home/nonroot|$HOME|g" stop_sign_train.txt
-$ sed -i "s|/home/nonroot|$HOME|g" stop_sign_valid.txt
+sed -i "s|/home/nonroot|$HOME|g" stop_sign_train.sh
+sed -i "s|/home/nonroot|$HOME|g" stop_sign.data
+sed -i "s|/home/nonroot|$HOME|g" stop_sign_train.txt
+sed -i "s|/home/nonroot|$HOME|g" stop_sign_valid.txt
 ```
