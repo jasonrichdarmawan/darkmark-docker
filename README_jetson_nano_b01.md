@@ -55,6 +55,18 @@ make package
 sudo dpkg -i darkmark*.deb
 ```
 
+# Tested Environment
+
+1. NVIDIA Jetson Nano B01 4GB RAM, Image: NVIDIA Jetpack SDK 4.6.1
+**DarkMark**
+darknet configuration template: yolov4-tiny.cfg
+network dimension: 256x256
+batch size: 1
+subdivisions: 1
+max_batches: 4000
+
+Elapsed time (h:mm:ss): 4:17:49
+
 # Known Issues
 
 1. If you set `CUDNN=1` in the `~/darknet/Makefile`, and if you try to install darknet in NVIDIA Jetson Nano B01, you will get this error message.
