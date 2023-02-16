@@ -68,6 +68,14 @@ max_batches: 4000
 
 Elapsed time (h:mm:ss): 4:17:49
 
+2. NVIDIA Jetson Nano B01 4GB RAM, Image: NVIDIA Jetpack SDK 4.6.1
+**DarkMark**
+darknet configuration template: yolov4-tiny-3l.cfg
+network dimension: 256x256
+batch size: 64
+subdivisions: 2
+max_batches: 8000
+
 # Known Issues
 
 1. If you set `CUDNN=1` in the `~/darknet/Makefile`, and if you try to install darknet in NVIDIA Jetson Nano B01, you will get this error message.
