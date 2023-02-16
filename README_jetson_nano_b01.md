@@ -17,6 +17,7 @@ sed -i '0,/CUDNN_HALF=0/s//CUDNN_HALF=1/' Makefile
 sed -i '0,/# ARCH= -gencode arch=compute_53,code=\[sm_53,compute_53\]/s//ARCH= -gencode arch=compute_53,code=\[sm_53,compute_53\]/' Makefile
 echo -e "export PATH=/usr/local/cuda/bin:$PATH\nexport LD_LIBRARY_PATH=/usr/local/cuda/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}" >> ~/.bashrc
 source ~/.bashrc
+make
 sudo cp libdarknet.so /usr/local/lib/
 sudo cp include/darknet.h /usr/local/include/
 sudo ldconfig
