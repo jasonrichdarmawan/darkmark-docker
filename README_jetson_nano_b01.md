@@ -73,8 +73,10 @@ Elapsed time (h:mm:ss): 4:17:49
 darknet configuration template: yolov4-tiny-3l.cfg
 network dimension: 256x256
 batch size: 64
-subdivisions: 2
+subdivisions: 1
 max_batches: 8000
+
+Elapsed time (h:mm:ss): 8:28:36
 
 # Known Issues
 
