@@ -133,6 +133,8 @@ max_batches: 20000
 
 Note: with n1-standard-1 (1vCPU, 3.75 GB memory), darknet will experience CPU bottleneck.
 
+Elapsed time (h:mm:ss): 9:36:28
+
 # Known Issues
 
 1. Error at 1000 iterations
