@@ -31,6 +31,20 @@ sudo sed -i '/SUBSYSTEM=="memory", ACTION=="add"/d' /etc/udev/rules.d/40-vm-hota
 ```
 
 **Reboot now**
+Otherwise, you will get error when building darknet
+```
+(instance) $ make
+chmod +x *.sh
+g++ -std=c++11 -std=c++11 -Iinclude/ -I3rdparty/stb/include -DOPENCV `pkg-config --cflags opencv4 2> /dev/null || pkg-config --cflags opencv` -DGPU -I/usr/local/cuda/include/ -DCUDNN -DCUDNN_HALF -Wall -Wfatal-errors -Wno-unused-result -Wno-unknown-pragmas -fPIC -Ofast -DOPENCV -fopenmp -DGPU -DCUDNN -I/usr/local/cudnn/include -DCUDNN_HALF -fPIC -c ./src/image_opencv.cpp -o obj/image_opencv.o
+In file included from ./src/image.h:3,
+                 from ./src/image_opencv.h:4,
+                 from ./src/image_opencv.cpp:1:
+include/darknet.h:46:10: fatal error: cudnn.h: No such file or directory
+   46 | #include <cudnn.h>
+      |          ^~~~~~~~~
+compilation terminated.
+make: *** [Makefile:182: obj/image_opencv.o] Error 1
+```
 
 2. Install cuDNN v8.4.1 (May 27th, 2022) for CUDA 11.6
 
