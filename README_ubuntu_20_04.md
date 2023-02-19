@@ -13,21 +13,20 @@ Reference:
 ```
 wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-ubuntu2004.pin
 sudo mv cuda-ubuntu2004.pin /etc/apt/preferences.d/cuda-repository-pin-600
-
 wget https://developer.download.nvidia.com/compute/cuda/11.7.1/local_installers/cuda-repo-ubuntu2004-11-7-local_11.7.1-515.65.01-1_amd64.deb
 sudo dpkg -i cuda-repo-ubuntu2004-11-7-local_11.7.1-515.65.01-1_amd64.deb
 sudo cp /var/cuda-repo-ubuntu2004-11-7-local/cuda-*-keyring.gpg /usr/share/keyrings/
-
 sudo apt-get update
 sudo apt-get -y install cuda
 
 export PATH=/usr/local/cuda-11.7/bin$PATH
 export LD_LIBRARY_PATH=/usr/local/cuda-11.7/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 echo -e "export PATH=/usr/local/cuda-11.7/bin:$PATH\nexport LD_LIBRARY_PATH=/usr/local/cuda-11.7/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}" >> ~/.bashrc
-
 sudo systemctl enable nvidia-persistenced
 sudo cp /lib/udev/rules.d/40-vm-hotadd.rules /etc/udev/rules.d
 sudo sed -i '/SUBSYSTEM=="memory", ACTION=="add"/d' /etc/udev/rules.d/40-vm-hotadd.rules
+
+sudo reboot now
 ```
 
 **Reboot now**
@@ -53,11 +52,10 @@ Reference:
 ```
 wget https://developer.download.nvidia.com/compute/redist/cudnn/v8.4.1/local_installers/11.6/cudnn-local-repo-ubuntu2004-8.4.1.50_1.0-1_amd64.deb
 sudo dpkg -i cudnn-local-repo-ubuntu2004-8.4.1.50_1.0-1_amd64.deb
-
 sudo cp /var/cudnn-local-repo-*/cudnn-local-*-keyring.gpg /usr/share/keyrings/
 sudo apt-get update
-
 sudo apt-get install libcudnn8=8.4.1.50-1+cuda11.6
+
 sudo apt-get install libcudnn8-dev=8.4.1.50-1+cuda11.6
 ```
 
@@ -65,6 +63,7 @@ sudo apt-get install libcudnn8-dev=8.4.1.50-1+cuda11.6
 ```
 sudo apt-get update
 sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes build-essential git libopencv-dev
+
 git clone https://github.com/AlexeyAB/darknet.git
 cd darknet
 sed -i '0,/OPENCV=0/s//OPENCV=1/; 0,/OPENMP=0/s//OPENMP=1/; 0,/LIBSO=0/s//LIBSO=1/' Makefile
@@ -75,6 +74,11 @@ sed -i '0,/CUDNN_HALF=0/s//CUDNN_HALF=1/' Makefile
 **If you use NVIDIA T4, run this command**
 ```
 sed -i '0,/# ARCH= -gencode arch=compute_75,code=\[sm_75,compute_75\]/s//ARCH= -gencode arch=compute_75,code=\[sm_75,compute_75\]/' Makefile
+```
+
+**If you use NVIDIA Tesla V100, run this command**
+```
+sed -i '0,/# ARCH= -gencode arch=compute_70,code=\[sm_70,compute_70\]/s//ARCH= -gencode arch=compute_70,code=\[sm_70,compute_70\]/' Makefile
 ```
 
 Build
@@ -88,6 +92,7 @@ sudo ldconfig
 3. Install DarkHelp
 ```
 sudo apt-get install --yes cmake build-essential libtclap-dev libmagic-dev libopencv-dev
+
 cd ~
 git clone https://github.com/stephanecharette/DarkHelp.git
 cd DarkHelp
@@ -102,6 +107,7 @@ sudo dpkg -i darkhelp*.deb
 4. Install DarkMark
 ```
 sudo apt-get install --yes build-essential cmake libopencv-dev libx11-dev libfreetype6-dev libxrandr-dev libxinerama-dev libxcursor-dev libmagic-dev libpoppler-cpp-dev fonts-liberation
+
 cd ~
 git clone https://github.com/stephanecharette/DarkMark.git
 cd DarkMark
@@ -119,7 +125,7 @@ sudo dpkg -i darkmark*.deb
 **Google Cloud Platform**
 Architecture: x86_64
 GPUs: 1x NVIDIA T4
-Machine type: n1-standard-1 (1vCPU, 3.75 GB memory)
+Machine type: n1-standard-1 (1 vCPU, 3.75 GB memory)
 Image: ubuntu-2004-focal-v20230125
 Boot disk type: SSD persistent disk (Size 50 GB)
 
@@ -134,7 +140,7 @@ max_batches: 6000
 **Google Cloud Platform**
 Architecture: x86_64
 GPUs: 1x NVIDIA T4
-Machine type: n1-standard-2 (2vCPU, 7.5 GB memory)
+Machine type: n1-standard-2 (2 vCPU, 7.5 GB memory)
 Image: ubuntu-2004-focal-v20230213
 Boot disk type: SSD persistent disk (Size 50 GB)
 
@@ -145,9 +151,26 @@ batch size: 64
 subdivisions: 2
 max_batches: 20000
 
-Note: with n1-standard-1 (1vCPU, 3.75 GB memory), darknet will experience CPU bottleneck.
+Note: with n1-standard-1 (1 vCPU, 3.75 GB memory), darknet will experience CPU bottleneck.
 
 Elapsed time (h:mm:ss): 9:36:28
+
+2. yolov4-tiny-3l 608x608
+**Google Cloud Platform**
+Architecture: x86_64
+GPUs: 1x NVIDIA T4
+Machine type: n1-standard-8 (8 vCPU, 30 GB memory)
+Image: ubuntu-2004-focal-v20230213
+Boot disk type: SSD persistent disk (Size 50 GB)
+
+**DarkMark**
+darknet configuration template: yolov4-tiny-3l.cfg
+network dimension: 608x608
+batch size: 64
+subdivisions: 2
+max_batches: 20000
+
+Elapsed time (h:mm:ss): 7:22:55
 
 # Known Issues
 
