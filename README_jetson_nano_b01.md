@@ -13,6 +13,7 @@ Reference:
 ```
 sudo apt-get update
 sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes build-essential git libopencv-dev
+
 git clone https://github.com/AlexeyAB/darknet.git
 cd darknet
 sed -i '0,/OPENCV=0/s//OPENCV=1/; 0,/OPENMP=0/s//OPENMP=1/; 0,/LIBSO=0/s//LIBSO=1/' Makefile
@@ -35,6 +36,7 @@ sudo apt-get --yes install time
 3. Install DarkHelp
 ```
 sudo apt-get install --yes cmake build-essential libtclap-dev libmagic-dev libopencv-dev
+
 cd ~
 git clone https://github.com/stephanecharette/DarkHelp.git
 cd DarkHelp
@@ -49,6 +51,7 @@ sudo dpkg -i darkhelp*.deb
 4. Install DarkMark
 ```
 sudo apt-get install --yes build-essential cmake libopencv-dev libx11-dev libfreetype6-dev libxrandr-dev libxinerama-dev libxcursor-dev libmagic-dev libpoppler-cpp-dev fonts-liberation
+
 cd ~
 git clone https://github.com/stephanecharette/DarkMark.git
 cd DarkMark
