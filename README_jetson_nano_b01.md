@@ -1,5 +1,9 @@
 This README is not related to darkmark-docker repository.
 
+# Requirements
+
+1. SD Card Image: JetPack SDK 4.6.1
+
 # Installation
 
 1. Install darknet
@@ -23,7 +27,7 @@ sudo cp include/darknet.h /usr/local/include/
 sudo ldconfig
 ```
 
-2. Install time
+2. If you want to train in NVIDIA Jetson Nano B01, install time
 ```
 sudo apt-get --yes install time
 ```
