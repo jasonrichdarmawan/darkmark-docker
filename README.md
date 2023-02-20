@@ -24,7 +24,7 @@ docker run --rm xeyes
 1. Start the X11 Server.
 2. `$ xhost +127.0.0.1` in the host machine terminal.
 3. Create a folder named `shared` in this repository. Use this folder for storing the neural network file, dataset, weights that will be used by DarkMark.
-4. Edit the `Dockerfile.new`, i.e. set to `AVX=1` in Makefile if you run the Docker image with Intel CPU.
+4. Edit the `Dockerfile` file, i.e. set to `AVX=1` in Makefile if you run the Docker image with Intel CPU.
 
 Reference:
 1. from the `darknet/Makefile` file
@@ -40,7 +40,7 @@ Reference:
 
 Build the Docker image
 ```
-docker build -t darkmark -f Dockerfile.new .
+docker build -t darkmark -f Dockerfile .
 docker run -it --rm -v $PWD/shared:/home/nonroot/shared --name darkmark darkmark
 ```
 
