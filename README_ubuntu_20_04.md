@@ -155,7 +155,7 @@ Note: with n1-standard-1 (1 vCPU, 3.75 GB memory), darknet will experience CPU b
 
 Elapsed time (h:mm:ss): 9:36:28
 
-2. yolov4-tiny-3l 608x608
+3. yolov4-tiny-3l 608x608
 **Google Cloud Platform**
 Architecture: x86_64
 GPUs: 1x NVIDIA T4
@@ -171,6 +171,23 @@ subdivisions: 2
 max_batches: 20000
 
 Elapsed time (h:mm:ss): 7:22:55
+
+4. yolov4-tiny-3l 608x608
+**Google Cloud Platform**
+Architecture: x86_64
+GPUs: 1x NVIDIA V100
+Machine type: n1-standard-4 (4 vCPU, 15 GB memory)
+Image: ubuntu-2004-focal-v20230213
+Boot disk type: SSD persistent disk (Size 50 GB)
+
+**DarkMark**
+darknet configuration template: yolov4-tiny-3l.cfg
+network dimension: 608x608
+batch size: 64
+subdivisions: 2
+max_batches: 20000
+
+Elapsed time (h:mm:ss): 3:55:02
 
 # Known Issues
 
